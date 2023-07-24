@@ -22,9 +22,9 @@ export default {
     StatisticsAria,
   },
   methods: {
-    updateStatistic(coordinates) {
-      this.xCoord = coordinates.x;
-      this.yCoord = coordinates.y;
+    updateStatistic({x, y}) {
+      this.xCoord = x;
+      this.yCoord = y;
     },
   },
 };
