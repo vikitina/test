@@ -26,35 +26,18 @@ export default {
       });
     },
     getPreparedX(e) {
-      const clickCoordinateX = e.pageX - this.getLeftBound;
-      return e.pageX >= this.getLeftBound 
-            && e.pageX <= this.getRightBound
-            ? clickCoordinateX
-            : this.xCoord;
+      return e.offsetX >= 0 && e.offsetX <= this.width
+        ? e.offsetX
+        : this.xCoord;
     },
     getPreparedY(e) {
-      const clickCoordinateY = e.pageY - this.getTopBound;
-      return e.pageY >= this.getTopBound 
-            && e.pageY <= this.getBottomBound
-            ? clickCoordinateY
-            : this.yCoord;
+      return e.offsetY >= 0 && e.offsetY <= this.height
+        ? e.offsetY
+        : this.yCoord;
     },
   },
 
   computed: {
-    getLeftBound() {
-      return this.$refs.gridElement.getBoundingClientRect().left;
-    },
-    getRightBound() {
-      return this.$refs.gridElement.getBoundingClientRect().right;
-    },
-    getTopBound() {
-      return this.$refs.gridElement.getBoundingClientRect().top;
-    },
-    getBottomBound() {
-      return this.$refs.gridElement.getBoundingClientRect().bottom;
-    },
-
     getStatisticX() {
       return this.xCoord - this.width * 0.5 >= 0
         ? this.xCoord - this.width * 0.5
@@ -67,7 +50,6 @@ export default {
     },
   },
   mounted() {
-    this.$nextTick(() => {
       const element = this.$refs.gridElement;
       this.width = element.offsetWidth;
       this.height = element.offsetHeight;
@@ -77,7 +59,6 @@ export default {
         x: this.getStatisticX,
         y: this.getStatisticY,
       });
-    });
   },
 };
 </script>

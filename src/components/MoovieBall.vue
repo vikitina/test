@@ -1,5 +1,5 @@
 <template lang="pug">
-  .special-ball(:style="`left:${x}px;top:${y}px`")
+  .special-ball(:style="getStyle" @click="(e) => {e.stopPropagation();}")
 </template>
 <script>
 export default {
@@ -7,6 +7,11 @@ export default {
     x: [String, Number],
     y: [String, Number],
   },
+  computed: {
+    getStyle() {
+      return `left:${this.x}px;top:${this.y}px`
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
