@@ -17,13 +17,16 @@ export default {
     MoovieBall,
   },
   methods: {
-    onClick(e) {
-      this.xCoord = this.getPreparedX(e);
-      this.yCoord = this.getPreparedY(e);
+    updateStatistic() {
       this.$emit("updateStatistic", {
         x: this.getStatisticX,
         y: this.getStatisticY,
       });
+    },    
+    onClick(e) {
+      this.xCoord = this.getPreparedX(e);
+      this.yCoord = this.getPreparedY(e);
+      this.updateStatistic();
     },
     getPreparedX(e) {
       return e.offsetX >= 0 && e.offsetX <= this.width
@@ -34,7 +37,7 @@ export default {
       return e.offsetY >= 0 && e.offsetY <= this.height
         ? e.offsetY
         : this.yCoord;
-    },
+    }
   },
 
   computed: {
@@ -55,10 +58,7 @@ export default {
       this.height = element.offsetHeight;
       this.xCoord = this.width * 0.5;
       this.yCoord = this.height * 0.5;
-      this.$emit("updateStatistic", {
-        x: this.getStatisticX,
-        y: this.getStatisticY,
-      });
+      this.updateStatistic();
   },
 };
 </script>
